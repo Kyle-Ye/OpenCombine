@@ -13,15 +13,6 @@ import Combine
 import OpenCombine
 #endif
 
-// swiftlint:disable generic_type_name
-/// See https://forums.swift.org/t/casting-from-any-to-optional/21883
-private func dynamicCast<T>(_ value: Any, to: T.Type) -> T? {
-    if let value = value as? T {
-        return value
-    } else {
-        return nil
-    }
-}
 // swiftlint:enable generic_type_name
 
 @available(macOS 10.15, iOS 13.0, *)
@@ -42,15 +33,7 @@ final class FutureTests: XCTestCase {
             return
         }
 
-        let parentAsSut: Sut?
-
-        do {
-            parentAsSut = try XCTUnwrap(dynamicCast(parent.value, to: Sut?.self))
-        } catch {
-            XCTFail("Unexpected type of the 'parent' property: \(parent.value)")
-            return
-        }
-
+        let parentAsSut = parent.value as? Sut
         if isNil {
             XCTAssertNil(parentAsSut)
         } else {
