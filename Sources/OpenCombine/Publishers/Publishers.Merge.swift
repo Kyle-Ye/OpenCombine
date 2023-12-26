@@ -365,6 +365,7 @@ extension Publishers {
         public func receive<S>(subscriber: S) where S: Subscriber, B.Failure == S.Failure, B.Output == S.Input {
             typealias Inner = _Merged<A.Output, Failure, S>
             let merger = Inner(downstream: subscriber, count: 2)
+            subscriber.receive(subscription: merger)
             a.subscribe(Inner.Side(index: 0, merger: merger))
             b.subscribe(Inner.Side(index: 1, merger: merger))
         }
@@ -436,6 +437,7 @@ extension Publishers {
         public func receive<S>(subscriber: S) where S: Subscriber, C.Failure == S.Failure, C.Output == S.Input {
             typealias Inner = _Merged<A.Output, Failure, S>
             let merger = Inner(downstream: subscriber, count: 3)
+            subscriber.receive(subscription: merger)
             a.subscribe(Inner.Side(index: 0, merger: merger))
             b.subscribe(Inner.Side(index: 1, merger: merger))
             c.subscribe(Inner.Side(index: 2, merger: merger))
@@ -509,6 +511,7 @@ extension Publishers {
         public func receive<S>(subscriber: S) where S: Subscriber, D.Failure == S.Failure, D.Output == S.Input {
             typealias Inner = _Merged<A.Output, Failure, S>
             let merger = Inner(downstream: subscriber, count: 4)
+            subscriber.receive(subscription: merger)
             a.subscribe(Inner.Side(index: 0, merger: merger))
             b.subscribe(Inner.Side(index: 1, merger: merger))
             c.subscribe(Inner.Side(index: 2, merger: merger))
@@ -584,6 +587,7 @@ extension Publishers {
         public func receive<S>(subscriber: S) where S: Subscriber, E.Failure == S.Failure, E.Output == S.Input {
             typealias Inner = _Merged<A.Output, Failure, S>
             let merger = Inner(downstream: subscriber, count: 5)
+            subscriber.receive(subscription: merger)
             a.subscribe(Inner.Side(index: 0, merger: merger))
             b.subscribe(Inner.Side(index: 1, merger: merger))
             c.subscribe(Inner.Side(index: 2, merger: merger))
@@ -661,6 +665,7 @@ extension Publishers {
         public func receive<S>(subscriber: S) where S: Subscriber, F.Failure == S.Failure, F.Output == S.Input {
             typealias Inner = _Merged<A.Output, Failure, S>
             let merger = Inner(downstream: subscriber, count: 6)
+            subscriber.receive(subscription: merger)
             a.subscribe(Inner.Side(index: 0, merger: merger))
             b.subscribe(Inner.Side(index: 1, merger: merger))
             c.subscribe(Inner.Side(index: 2, merger: merger))
@@ -740,6 +745,7 @@ extension Publishers {
         public func receive<S>(subscriber: S) where S: Subscriber, G.Failure == S.Failure, G.Output == S.Input {
             typealias Inner = _Merged<A.Output, Failure, S>
             let merger = Inner(downstream: subscriber, count: 7)
+            subscriber.receive(subscription: merger)
             a.subscribe(Inner.Side(index: 0, merger: merger))
             b.subscribe(Inner.Side(index: 1, merger: merger))
             c.subscribe(Inner.Side(index: 2, merger: merger))
@@ -821,6 +827,7 @@ extension Publishers {
         public func receive<S>(subscriber: S) where S: Subscriber, H.Failure == S.Failure, H.Output == S.Input {
             typealias Inner = _Merged<A.Output, Failure, S>
             let merger = Inner(downstream: subscriber, count: 8)
+            subscriber.receive(subscription: merger)
             a.subscribe(Inner.Side(index: 0, merger: merger))
             b.subscribe(Inner.Side(index: 1, merger: merger))
             c.subscribe(Inner.Side(index: 2, merger: merger))
@@ -869,6 +876,7 @@ extension Publishers {
         public func receive<S>(subscriber: S) where S: Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input {
             typealias Inner = _Merged<Upstream.Output, Failure, S>
             let merger = Inner(downstream: subscriber, count: publishers.count)
+            subscriber.receive(subscription: merger)
             for (index, publisher) in publishers.enumerated() {
                 publisher.subscribe(Inner.Side(index: index, merger: merger))
             }
