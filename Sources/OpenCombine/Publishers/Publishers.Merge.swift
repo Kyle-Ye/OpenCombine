@@ -1120,7 +1120,7 @@ extension Publishers._Merged: Subscription {
 }
 
 extension Publishers._Merged {
-    func receive(subscription: Subscription, index: Int) {
+    func receive(subscription: Subscription, _ index: Int) {
         lock.lock()
         guard !terminated, subscriptions[index] == nil else {
             lock.unlock()
@@ -1133,7 +1133,7 @@ extension Publishers._Merged {
         subscription.request(demand)
     }
     
-    func receive(_ input: Input, index: Int) -> Subscribers.Demand {
+    func receive(_ input: Input, _ index: Int) -> Subscribers.Demand {
         lock.lock()
         guard demand != .unlimited else {
             lock.unlock()
@@ -1158,13 +1158,13 @@ extension Publishers._Merged {
         }
     }
     
-    func receive(completion: Subscribers.Completion<Failure>, index: Int) {
+    func receive(completion: Subscribers.Completion<Failure>, _ index: Int) {
         switch completion {
         case .finished:
             lock.lock()
             upstreamFinished += 1
             subscriptions[index] = nil
-            if upstreamFinished == count, buffers.allSatisfy({ $0 != nil }) {
+            if upstreamFinished == count, buffers.allSatisfy({ $0 == nil }) {
                 finished = true
                 lock.unlock()
                 guardedBecomeTerminal()
@@ -1229,15 +1229,15 @@ extension Publishers._Merged {
 
 extension Publishers._Merged.Side: Subscriber {
     func receive(subscription: Subscription) {
-        merger.receive(subscription: subscription, index: index)
+        merger.receive(subscription: subscription, index)
     }
     
     func receive(_ input: Input) -> Subscribers.Demand {
-        merger.receive(input, index: index)
+        merger.receive(input, index)
     }
     
     func receive(completion: Subscribers.Completion<Failure>) {
-        merger.receive(completion: completion, index: index)
+        merger.receive(completion: completion, index)
     }
 }
 
