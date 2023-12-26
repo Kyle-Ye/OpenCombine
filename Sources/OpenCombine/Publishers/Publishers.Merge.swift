@@ -77,6 +77,254 @@ extension Publisher {
     public func merge<B, C>(with b: B, _ c: C) -> Publishers.Merge3<Self, B, C> where B: Publisher, C: Publisher, Self.Failure == B.Failure, Self.Output == B.Output, B.Failure == C.Failure, B.Output == C.Output {
         Publishers.Merge3(self, b, c)
     }
+
+    /// Combines elements from this publisher with those from three other publishers, delivering an interleaved sequence of elements.
+    ///
+    /// Use ``Publisher/merge(with:_:_:)`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:_:_:)-48buc``.
+    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-16rcy``.
+    ///
+    /// In this example, as ``Publisher/merge(with:_:_:)`` receives input from the upstream publishers, it republishes the interleaved elements to the downstream:
+    ///
+    ///     let pubA = PassthroughSubject<Int, Never>()
+    ///     let pubB = PassthroughSubject<Int, Never>()
+    ///     let pubC = PassthroughSubject<Int, Never>()
+    ///     let pubD = PassthroughSubject<Int, Never>()
+    ///
+    ///     cancellable = pubA
+    ///         .merge(with: pubB, pubC, pubD)
+    ///         .sink { print("\($0)", terminator: " " )}
+    ///
+    ///     pubA.send(1)
+    ///     pubB.send(40)
+    ///     pubC.send(90)
+    ///     pubD.send(-1)
+    ///     pubA.send(2)
+    ///     pubB.send(50)
+    ///     pubC.send(100)
+    ///     pubD.send(-2)
+    ///
+    ///     // Prints: "1 40 90 -1 2 50 100 -2 "
+    ///
+    /// The merged publisher continues to emit elements until all upstream publishers finish.
+    /// If an upstream publisher produces an error, the merged publisher fails with that error.
+    ///
+    /// - Parameters:
+    ///   - b: A second publisher.
+    ///   - c: A third publisher.
+    ///   - d: A fourth publisher.
+    /// - Returns: A publisher that emits an event when any upstream publisher emits an event.
+    public func merge<B, C, D>(with b: B, _ c: C, _ d: D) -> Publishers.Merge4<Self, B, C, D> where B: Publisher, C: Publisher, D: Publisher, Self.Failure == B.Failure, Self.Output == B.Output, B.Failure == C.Failure, B.Output == C.Output, C.Failure == D.Failure, C.Output == D.Output {
+        Publishers.Merge4(self, b, c, d)
+    }
+
+    /// Combines elements from this publisher with those from four other publishers, delivering an interleaved sequence of elements.
+    ///
+    /// Use ``Publisher/merge(with:_:_:_:)`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:_:_:)-48buc``.
+    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-16rcy``.
+    ///
+    /// In this example, as ``Publisher/merge(with:_:_:_:)`` receives input from the upstream publishers, it republishes the interleaved elements to the downstream:
+    ///
+    ///      let pubA = PassthroughSubject<Int, Never>()
+    ///      let pubB = PassthroughSubject<Int, Never>()
+    ///      let pubC = PassthroughSubject<Int, Never>()
+    ///      let pubD = PassthroughSubject<Int, Never>()
+    ///      let pubE = PassthroughSubject<Int, Never>()
+    ///
+    ///      cancellable = pubA
+    ///          .merge(with: pubB, pubC, pubD, pubE)
+    ///          .sink { print("\($0)", terminator: " " ) }
+    ///
+    ///      pubA.send(1)
+    ///      pubB.send(40)
+    ///      pubC.send(90)
+    ///      pubD.send(-1)
+    ///      pubE.send(33)
+    ///      pubA.send(2)
+    ///      pubB.send(50)
+    ///      pubC.send(100)
+    ///      pubD.send(-2)
+    ///      pubE.send(33)
+    ///
+    ///      // Prints: "1 40 90 -1 33 2 50 100 -2 33"
+    ///
+    ///
+    /// The merged publisher continues to emit elements until all upstream publishers finish.
+    /// If an upstream publisher produces an error, the merged publisher fails with that error.
+    ///
+    /// - Parameters:
+    ///   - b: A second publisher.
+    ///   - c: A third publisher.
+    ///   - d: A fourth publisher.
+    ///   - e: A fifth publisher.
+    /// - Returns: A publisher that emits an event when any upstream publisher emits an event.
+    public func merge<B, C, D, E>(with b: B, _ c: C, _ d: D, _ e: E) -> Publishers.Merge5<Self, B, C, D, E> where B: Publisher, C: Publisher, D: Publisher, E: Publisher, Self.Failure == B.Failure, Self.Output == B.Output, B.Failure == C.Failure, B.Output == C.Output, C.Failure == D.Failure, C.Output == D.Output, D.Failure == E.Failure, D.Output == E.Output {
+        Publishers.Merge5(self, b, c, d, e)
+    }
+
+    /// Combines elements from this publisher with those from five other publishers, delivering an interleaved sequence of elements.
+    ///
+    /// Use ``Publisher/merge(with:_:_:_:_:_:)`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:_:_:)-48buc``.
+    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-16rcy``.
+    ///
+    /// In this example, as ``Publisher/merge(with:_:_:_:_:_:)`` receives input from the upstream publishers, it republishes the interleaved elements to the downstream:
+    ///
+    ///     let pubA = PassthroughSubject<Int, Never>()
+    ///     let pubB = PassthroughSubject<Int, Never>()
+    ///     let pubC = PassthroughSubject<Int, Never>()
+    ///     let pubD = PassthroughSubject<Int, Never>()
+    ///     let pubE = PassthroughSubject<Int, Never>()
+    ///     let pubF = PassthroughSubject<Int, Never>()
+    ///
+    ///     cancellable = pubA
+    ///         .merge(with: pubB, pubC, pubD, pubE, pubF)
+    ///         .sink { print("\($0)", terminator: " " ) }
+    ///
+    ///     pubA.send(1)
+    ///     pubB.send(40)
+    ///     pubC.send(90)
+    ///     pubD.send(-1)
+    ///     pubE.send(33)
+    ///     pubF.send(44)
+    ///
+    ///     pubA.send(2)
+    ///     pubB.send(50)
+    ///     pubC.send(100)
+    ///     pubD.send(-2)
+    ///     pubE.send(33)
+    ///     pubF.send(33)
+    ///
+    ///     //Prints: "1 40 90 -1 33 44 2 50 100 -2 33 33"
+    ///
+    /// The merged publisher continues to emit elements until all upstream publishers finish.
+    /// If an upstream publisher produces an error, the merged publisher fails with that error.
+    ///
+    /// - Parameters:
+    ///   - b: A second publisher.
+    ///   - c: A third publisher.
+    ///   - d: A fourth publisher.
+    ///   - e: A fifth publisher.
+    ///   - f: A sixth publisher.
+    /// - Returns: A publisher that emits an event when any upstream publisher emits an event.
+    public func merge<B, C, D, E, F>(with b: B, _ c: C, _ d: D, _ e: E, _ f: F) -> Publishers.Merge6<Self, B, C, D, E, F> where B: Publisher, C: Publisher, D: Publisher, E: Publisher, F: Publisher, Self.Failure == B.Failure, Self.Output == B.Output, B.Failure == C.Failure, B.Output == C.Output, C.Failure == D.Failure, C.Output == D.Output, D.Failure == E.Failure, D.Output == E.Output, E.Failure == F.Failure, E.Output == F.Output {
+        Publishers.Merge6(self, b, c, d, e, f)
+    }
+
+    /// Combines elements from this publisher with those from six other publishers, delivering an interleaved sequence of elements.
+    ///
+    /// Use ``Publisher/merge(with:_:_:_:_:_:)`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:_:_:)-48buc``.
+    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-16rcy``.
+    ///
+    /// In this example, as ``Publisher/merge(with:_:_:_:_:_:)`` receives input from the upstream publishers; it republishes the interleaved elements to the downstream:
+    ///
+    ///     let pubA = PassthroughSubject<Int, Never>()
+    ///     let pubB = PassthroughSubject<Int, Never>()
+    ///     let pubC = PassthroughSubject<Int, Never>()
+    ///     let pubD = PassthroughSubject<Int, Never>()
+    ///     let pubE = PassthroughSubject<Int, Never>()
+    ///     let pubF = PassthroughSubject<Int, Never>()
+    ///     let pubG = PassthroughSubject<Int, Never>()
+    ///
+    ///     cancellable = pubA
+    ///         .merge(with: pubB, pubC, pubD, pubE, pubE, pubG)
+    ///         .sink { print("\($0)", terminator: " " ) }
+    ///
+    ///     pubA.send(1)
+    ///     pubB.send(40)
+    ///     pubC.send(90)
+    ///     pubD.send(-1)
+    ///     pubE.send(33)
+    ///     pubF.send(44)
+    ///     pubG.send(54)
+    ///
+    ///     pubA.send(2)
+    ///     pubB.send(50)
+    ///     pubC.send(100)
+    ///     pubD.send(-2)
+    ///     pubE.send(33)
+    ///     pubF.send(33)
+    ///     pubG.send(54)
+    ///
+    ///     //Prints: "1 40 90 -1 33 44 54 2 50 100 -2 33 33 54"
+    ///
+    ///
+    /// The merged publisher continues to emit elements until all upstream publishers finish.
+    /// If an upstream publisher produces an error, the merged publisher fails with that error.
+    ///
+    /// - Parameters:
+    ///   - b: A second publisher.
+    ///   - c: A third publisher.
+    ///   - d: A fourth publisher.
+    ///   - e: A fifth publisher.
+    ///   - f: A sixth publisher.
+    ///   - g: A seventh publisher.
+    /// - Returns: A publisher that emits an event when any upstream publisher emits an event.
+    public func merge<B, C, D, E, F, G>(with b: B, _ c: C, _ d: D, _ e: E, _ f: F, _ g: G) -> Publishers.Merge7<Self, B, C, D, E, F, G> where B: Publisher, C: Publisher, D: Publisher, E: Publisher, F: Publisher, G: Publisher, Self.Failure == B.Failure, Self.Output == B.Output, B.Failure == C.Failure, B.Output == C.Output, C.Failure == D.Failure, C.Output == D.Output, D.Failure == E.Failure, D.Output == E.Output, E.Failure == F.Failure, E.Output == F.Output, F.Failure == G.Failure, F.Output == G.Output {
+        Publishers.Merge7(self, b, c, d, e, f, g)
+    }
+
+    /// Combines elements from this publisher with those from seven other publishers, delivering an interleaved sequence of elements.
+    ///
+    /// Use ``Publisher/merge(with:_:_:_:_:_:_:)`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:_:_:)-48buc``.
+    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-16rcy``.
+    ///
+    /// In this example, as ``Publisher/merge(with:_:_:_:_:_:_:)`` receives input from the upstream publishers, it republishes the interleaved elements to the downstream:
+    ///
+    ///     let pubA = PassthroughSubject<Int, Never>()
+    ///     let pubB = PassthroughSubject<Int, Never>()
+    ///     let pubC = PassthroughSubject<Int, Never>()
+    ///     let pubD = PassthroughSubject<Int, Never>()
+    ///     let pubE = PassthroughSubject<Int, Never>()
+    ///     let pubF = PassthroughSubject<Int, Never>()
+    ///     let pubG = PassthroughSubject<Int, Never>()
+    ///     let pubH = PassthroughSubject<Int, Never>()
+    ///
+    ///     cancellable = pubA
+    ///         .merge(with: pubB, pubC, pubD, pubE, pubF, pubG, pubH)
+    ///         .sink { print("\($0)", terminator: " " ) }
+    ///
+    ///     pubA.send(1)
+    ///     pubB.send(40)
+    ///     pubC.send(90)
+    ///     pubD.send(-1)
+    ///     pubE.send(33)
+    ///     pubF.send(44)
+    ///     pubG.send(54)
+    ///     pubH.send(1000)
+    ///
+    ///     pubA.send(2)
+    ///     pubB.send(50)
+    ///     pubC.send(100)
+    ///     pubD.send(-2)
+    ///     pubE.send(33)
+    ///     pubF.send(33)
+    ///     pubG.send(54)
+    ///     pubH.send(1001)
+    ///
+    ///     //Prints: "1 40 90 -1 33 44 54 1000 2 50 100 -2 33 33 54 1001"
+    ///
+    /// The merged publisher continues to emit elements until all upstream publishers finish.
+    /// If an upstream publisher produces an error, the merged publisher fails with that error.
+    ///
+    /// - Parameters:
+    ///   - b: A second publisher.
+    ///   - c: A third publisher.
+    ///   - d: A fourth publisher.
+    ///   - e: A fifth publisher.
+    ///   - f: A sixth publisher.
+    ///   - g: A seventh publisher.
+    ///   - h: An eighth publisher.
+    /// - Returns: A publisher that emits an event when any upstream publisher emits an event.
+    public func merge<B, C, D, E, F, G, H>(with b: B, _ c: C, _ d: D, _ e: E, _ f: F, _ g: G, _ h: H) -> Publishers.Merge8<Self, B, C, D, E, F, G, H> where B: Publisher, C: Publisher, D: Publisher, E: Publisher, F: Publisher, G: Publisher, H: Publisher, Self.Failure == B.Failure, Self.Output == B.Output, B.Failure == C.Failure, B.Output == C.Output, C.Failure == D.Failure, C.Output == D.Output, D.Failure == E.Failure, D.Output == E.Output, E.Failure == F.Failure, E.Output == F.Output, F.Failure == G.Failure, F.Output == G.Output, G.Failure == H.Failure, G.Output == H.Output {
+        Publishers.Merge8(self, b, c, d, e, f, g, h)
+    }
+
+    /// Combines elements from this publisher with those from another publisher of the same type, delivering an interleaved sequence of elements.
+    ///
+    /// - Parameter other: Another publisher of this publisher’s type.
+    /// - Returns: A publisher that emits an event when either upstream publisher emits an event.
+    public func merge(with other: Self) -> Publishers.MergeMany<Self> {
+        Publishers.MergeMany([self, other])
+    }
 }
 
 extension Publishers {
@@ -124,6 +372,26 @@ extension Publishers {
         public func merge<P>(with p: P) -> Publishers.Merge3<A, B, P> where P: Publisher, B.Failure == P.Failure, B.Output == P.Output {
             Merge3(a, b, p)
         }
+
+        public func merge<Z, Y>(with z: Z, _ y: Y) -> Publishers.Merge4<A, B, Z, Y> where Z: Publisher, Y: Publisher, B.Failure == Z.Failure, B.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output {
+            Merge4(a, b, z, y)
+        }
+
+        public func merge<Z, Y, X>(with z: Z, _ y: Y, _ x: X) -> Publishers.Merge5<A, B, Z, Y, X> where Z: Publisher, Y: Publisher, X: Publisher, B.Failure == Z.Failure, B.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output, Y.Failure == X.Failure, Y.Output == X.Output {
+            Merge5(a, b, z, y, x)
+        }
+
+        public func merge<Z, Y, X, W>(with z: Z, _ y: Y, _ x: X, _ w: W) -> Publishers.Merge6<A, B, Z, Y, X, W> where Z: Publisher, Y: Publisher, X: Publisher, W: Publisher, B.Failure == Z.Failure, B.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output, Y.Failure == X.Failure, Y.Output == X.Output, X.Failure == W.Failure, X.Output == W.Output {
+            Merge6(a, b, z, y, x, w)
+        }
+
+        public func merge<Z, Y, X, W, V>(with z: Z, _ y: Y, _ x: X, _ w: W, _ v: V) -> Publishers.Merge7<A, B, Z, Y, X, W, V> where Z: Publisher, Y: Publisher, X: Publisher, W: Publisher, V: Publisher, B.Failure == Z.Failure, B.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output, Y.Failure == X.Failure, Y.Output == X.Output, X.Failure == W.Failure, X.Output == W.Output, W.Failure == V.Failure, W.Output == V.Output {
+            Merge7(a, b, z, y, x, w, v)
+        }
+
+        public func merge<Z, Y, X, W, V, U>(with z: Z, _ y: Y, _ x: X, _ w: W, _ v: V, _ u: U) -> Publishers.Merge8<A, B, Z, Y, X, W, V, U> where Z: Publisher, Y: Publisher, X: Publisher, W: Publisher, V: Publisher, U: Publisher, B.Failure == Z.Failure, B.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output, Y.Failure == X.Failure, Y.Output == X.Output, X.Failure == W.Failure, X.Output == W.Output, W.Failure == V.Failure, W.Output == V.Output, V.Failure == U.Failure, V.Output == U.Output {
+            Merge8(a, b, z, y, x, w, v, u)
+        }
     }
     
     /// A publisher created by applying the merge function to three upstream publishers.
@@ -132,21 +400,21 @@ extension Publishers {
         ///
         /// This publisher uses its upstream publishers' common output type.
         public typealias Output = A.Output
-        
+
         /// The kind of errors this publisher might publish.
         ///
         /// This publisher uses its upstream publishers' common failure type.
         public typealias Failure = A.Failure
-        
+
         /// A publisher to merge.
         public let a: A
-        
+
         /// A second publisher to merge.
         public let b: B
-        
+
         /// A third publisher to merge.
         public let c: C
-        
+
         /// Creates a publisher created by applying the merge function to three upstream publishers.
         /// - Parameters:
         ///   - a: A publisher to merge
@@ -157,7 +425,7 @@ extension Publishers {
             self.b = b
             self.c = c
         }
-        
+
         /// Attaches the specified subscriber to this publisher.
         ///
         /// Implementations of ``Publisher`` must implement this method.
@@ -171,6 +439,443 @@ extension Publishers {
             a.subscribe(Inner.Side(index: 0, merger: merger))
             b.subscribe(Inner.Side(index: 1, merger: merger))
             c.subscribe(Inner.Side(index: 2, merger: merger))
+        }
+        
+        public func merge<P>(with other: P) -> Publishers.Merge4<A, B, C, P> where P: Publisher, C.Failure == P.Failure, C.Output == P.Output {
+            Merge4(a, b, c, other)
+        }
+
+        public func merge<Z, Y>(with z: Z, _ y: Y) -> Publishers.Merge5<A, B, C, Z, Y> where Z: Publisher, Y: Publisher, C.Failure == Z.Failure, C.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output {
+            Merge5(a, b, c, z, y)
+        }
+
+        public func merge<Z, Y, X>(with z: Z, _ y: Y, _ x: X) -> Publishers.Merge6<A, B, C, Z, Y, X> where Z: Publisher, Y: Publisher, X: Publisher, C.Failure == Z.Failure, C.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output, Y.Failure == X.Failure, Y.Output == X.Output {
+            Merge6(a, b, c, z, y, x)
+        }
+
+        public func merge<Z, Y, X, W>(with z: Z, _ y: Y, _ x: X, _ w: W) -> Publishers.Merge7<A, B, C, Z, Y, X, W> where Z: Publisher, Y: Publisher, X: Publisher, W: Publisher, C.Failure == Z.Failure, C.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output, Y.Failure == X.Failure, Y.Output == X.Output, X.Failure == W.Failure, X.Output == W.Output {
+            Merge7(a, b, c, z, y, x, w)
+        }
+
+        public func merge<Z, Y, X, W, V>(with z: Z, _ y: Y, _ x: X, _ w: W, _ v: V) -> Publishers.Merge8<A, B, C, Z, Y, X, W, V> where Z: Publisher, Y: Publisher, X: Publisher, W: Publisher, V: Publisher, C.Failure == Z.Failure, C.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output, Y.Failure == X.Failure, Y.Output == X.Output, X.Failure == W.Failure, X.Output == W.Output, W.Failure == V.Failure, W.Output == V.Output {
+            Merge8(a, b, c, z, y, x, w, v)
+        }
+    }
+
+    /// A publisher created by applying the merge function to four upstream publishers.
+    public struct Merge4<A, B, C, D>: Publisher where A: Publisher, B: Publisher, C: Publisher, D: Publisher, A.Failure == B.Failure, A.Output == B.Output, B.Failure == C.Failure, B.Output == C.Output, C.Failure == D.Failure, C.Output == D.Output {
+        /// The kind of values published by this publisher.
+        ///
+        /// This publisher uses its upstream publishers' common output type.
+        public typealias Output = A.Output
+
+        /// The kind of errors this publisher might publish.
+        ///
+        /// This publisher uses its upstream publishers' common failure type.
+        public typealias Failure = A.Failure
+
+        /// A publisher to merge.
+        public let a: A
+
+        /// A second publisher to merge.
+        public let b: B
+
+        /// A third publisher to merge.
+        public let c: C
+
+        /// A fourth publisher to merge.
+        public let d: D
+
+        /// Creates a publisher created by applying the merge function to four upstream publishers.
+        /// - Parameters:
+        ///   - a: A publisher to merge
+        ///   - b: A second publisher to merge.
+        ///   - c: A third publisher to merge.
+        ///   - d: A fourth publisher to merge.
+        public init(_ a: A, _ b: B, _ c: C, _ d: D) {
+            self.a = a
+            self.b = b
+            self.c = c
+            self.d = d
+        }
+
+        /// Attaches the specified subscriber to this publisher.
+        ///
+        /// Implementations of ``Publisher`` must implement this method.
+        ///
+        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        ///
+        /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
+        public func receive<S>(subscriber: S) where S: Subscriber, D.Failure == S.Failure, D.Output == S.Input {
+            typealias Inner = _Merged<A.Output, Failure, S>
+            let merger = Inner(downstream: subscriber, count: 4)
+            a.subscribe(Inner.Side(index: 0, merger: merger))
+            b.subscribe(Inner.Side(index: 1, merger: merger))
+            c.subscribe(Inner.Side(index: 2, merger: merger))
+            d.subscribe(Inner.Side(index: 3, merger: merger))
+        }
+
+        public func merge<P>(with other: P) -> Publishers.Merge5<A, B, C, D, P> where P: Publisher, D.Failure == P.Failure, D.Output == P.Output {
+            Merge5(a, b, c, d, other)
+        }
+
+        public func merge<Z, Y>(with z: Z, _ y: Y) -> Publishers.Merge6<A, B, C, D, Z, Y> where Z: Publisher, Y: Publisher, D.Failure == Z.Failure, D.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output {
+            Merge6(a, b, c, d, z, y)
+        }
+
+        public func merge<Z, Y, X>(with z: Z, _ y: Y, _ x: X) -> Publishers.Merge7<A, B, C, D, Z, Y, X> where Z: Publisher, Y: Publisher, X: Publisher, D.Failure == Z.Failure, D.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output, Y.Failure == X.Failure, Y.Output == X.Output {
+            Merge7(a, b, c, d, z, y, x)
+        }
+
+        public func merge<Z, Y, X, W>(with z: Z, _ y: Y, _ x: X, _ w: W) -> Publishers.Merge8<A, B, C, D, Z, Y, X, W> where Z: Publisher, Y: Publisher, X: Publisher, W: Publisher, D.Failure == Z.Failure, D.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output, Y.Failure == X.Failure, Y.Output == X.Output, X.Failure == W.Failure, X.Output == W.Output {
+            Merge8(a, b, c, d, z, y, x, w)
+        }
+    }
+
+    /// A publisher created by applying the merge function to five upstream publishers.
+    public struct Merge5<A, B, C, D, E>: Publisher where A: Publisher, B: Publisher, C: Publisher, D: Publisher, E: Publisher, A.Failure == B.Failure, A.Output == B.Output, B.Failure == C.Failure, B.Output == C.Output, C.Failure == D.Failure, C.Output == D.Output, D.Failure == E.Failure, D.Output == E.Output {
+        /// The kind of values published by this publisher.
+        ///
+        /// This publisher uses its upstream publishers' common output type.
+        public typealias Output = A.Output
+
+        /// The kind of errors this publisher might publish.
+        ///
+        /// This publisher uses its upstream publishers' common failure type.
+        public typealias Failure = A.Failure
+
+        /// A publisher to merge.
+        public let a: A
+
+        /// A second publisher to merge.
+        public let b: B
+
+        /// A third publisher to merge.
+        public let c: C
+
+        /// A fourth publisher to merge.
+        public let d: D
+
+        /// A fifth publisher to merge.
+        public let e: E
+
+        /// Creates a publisher created by applying the merge function to five upstream publishers.
+        /// - Parameters:
+        ///   - a: A publisher to merge
+        ///   - b: A second publisher to merge.
+        ///   - c: A third publisher to merge.
+        ///   - d: A fourth publisher to merge.
+        ///   - e: A fifth publisher to merge.
+        public init(_ a: A, _ b: B, _ c: C, _ d: D, _ e: E) {
+            self.a = a
+            self.b = b
+            self.c = c
+            self.d = d
+            self.e = e
+        }
+
+        /// Attaches the specified subscriber to this publisher.
+        ///
+        /// Implementations of ``Publisher`` must implement this method.
+        ///
+        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        ///
+        /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
+        public func receive<S>(subscriber: S) where S: Subscriber, E.Failure == S.Failure, E.Output == S.Input {
+            typealias Inner = _Merged<A.Output, Failure, S>
+            let merger = Inner(downstream: subscriber, count: 5)
+            a.subscribe(Inner.Side(index: 0, merger: merger))
+            b.subscribe(Inner.Side(index: 1, merger: merger))
+            c.subscribe(Inner.Side(index: 2, merger: merger))
+            d.subscribe(Inner.Side(index: 3, merger: merger))
+            e.subscribe(Inner.Side(index: 4, merger: merger))
+        }
+
+        public func merge<P>(with other: P) -> Publishers.Merge6<A, B, C, D, E, P> where P: Publisher, E.Failure == P.Failure, E.Output == P.Output {
+            Merge6(a, b, c, d, e, other)
+        }
+
+        public func merge<Z, Y>(with z: Z, _ y: Y) -> Publishers.Merge7<A, B, C, D, E, Z, Y> where Z: Publisher, Y: Publisher, E.Failure == Z.Failure, E.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output {
+            Merge7(a, b, c, d, e, z, y)
+        }
+
+        public func merge<Z, Y, X>(with z: Z, _ y: Y, _ x: X) -> Publishers.Merge8<A, B, C, D, E, Z, Y, X> where Z: Publisher, Y: Publisher, X: Publisher, E.Failure == Z.Failure, E.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output, Y.Failure == X.Failure, Y.Output == X.Output {
+            Merge8(a, b, c, d, e, z, y, x)
+        }
+    }
+
+    /// A publisher created by applying the merge function to six upstream publishers.
+    public struct Merge6<A, B, C, D, E, F>: Publisher where A: Publisher, B: Publisher, C: Publisher, D: Publisher, E: Publisher, F: Publisher, A.Failure == B.Failure, A.Output == B.Output, B.Failure == C.Failure, B.Output == C.Output, C.Failure == D.Failure, C.Output == D.Output, D.Failure == E.Failure, D.Output == E.Output, E.Failure == F.Failure, E.Output == F.Output {
+        /// The kind of values published by this publisher.
+        ///
+        /// This publisher uses its upstream publishers' common output type.
+        public typealias Output = A.Output
+
+        /// The kind of errors this publisher might publish.
+        ///
+        /// This publisher uses its upstream publishers' common failure type.
+        public typealias Failure = A.Failure
+
+        /// A publisher to merge.
+        public let a: A
+
+        /// A second publisher to merge.
+        public let b: B
+
+        /// A third publisher to merge.
+        public let c: C
+
+        /// A fourth publisher to merge.
+        public let d: D
+
+        /// A fifth publisher to merge.
+        public let e: E
+
+        /// A sixth publisher to merge.
+        public let f: F
+
+        /// publisher created by applying the merge function to six upstream publishers.
+        /// - Parameters:
+        ///   - a: A publisher to merge
+        ///   - b: A second publisher to merge.
+        ///   - c: A third publisher to merge.
+        ///   - d: A fourth publisher to merge.
+        ///   - e: A fifth publisher to merge.
+        ///   - f: A sixth publisher to merge.
+        public init(_ a: A, _ b: B, _ c: C, _ d: D, _ e: E, _ f: F) {
+            self.a = a
+            self.b = b
+            self.c = c
+            self.d = d
+            self.e = e
+            self.f = f
+        }
+
+        /// Attaches the specified subscriber to this publisher.
+        ///
+        /// Implementations of ``Publisher`` must implement this method.
+        ///
+        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        ///
+        /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
+        public func receive<S>(subscriber: S) where S: Subscriber, F.Failure == S.Failure, F.Output == S.Input {
+            typealias Inner = _Merged<A.Output, Failure, S>
+            let merger = Inner(downstream: subscriber, count: 6)
+            a.subscribe(Inner.Side(index: 0, merger: merger))
+            b.subscribe(Inner.Side(index: 1, merger: merger))
+            c.subscribe(Inner.Side(index: 2, merger: merger))
+            d.subscribe(Inner.Side(index: 3, merger: merger))
+            e.subscribe(Inner.Side(index: 4, merger: merger))
+            f.subscribe(Inner.Side(index: 5, merger: merger))
+        }
+
+        public func merge<P>(with other: P) -> Publishers.Merge7<A, B, C, D, E, F, P> where P: Publisher, F.Failure == P.Failure, F.Output == P.Output {
+            Merge7(a, b, c, d, e, f, other)
+        }
+
+        public func merge<Z, Y>(with z: Z, _ y: Y) -> Publishers.Merge8<A, B, C, D, E, F, Z, Y> where Z: Publisher, Y: Publisher, F.Failure == Z.Failure, F.Output == Z.Output, Z.Failure == Y.Failure, Z.Output == Y.Output {
+            Merge8(a, b, c, d, e, f, z, y)
+        }
+    }
+
+    /// A publisher created by applying the merge function to seven upstream publishers.
+    public struct Merge7<A, B, C, D, E, F, G>: Publisher where A: Publisher, B: Publisher, C: Publisher, D: Publisher, E: Publisher, F: Publisher, G: Publisher, A.Failure == B.Failure, A.Output == B.Output, B.Failure == C.Failure, B.Output == C.Output, C.Failure == D.Failure, C.Output == D.Output, D.Failure == E.Failure, D.Output == E.Output, E.Failure == F.Failure, E.Output == F.Output, F.Failure == G.Failure, F.Output == G.Output {
+        /// The kind of values published by this publisher.
+        ///
+        /// This publisher uses its upstream publishers' common output type.
+        public typealias Output = A.Output
+
+        /// The kind of errors this publisher might publish.
+        ///
+        /// This publisher uses its upstream publishers' common failure type.
+        public typealias Failure = A.Failure
+
+        /// A publisher to merge.
+        public let a: A
+
+        /// A second publisher to merge.
+        public let b: B
+
+        /// A third publisher to merge.
+        public let c: C
+
+        /// A fourth publisher to merge.
+        public let d: D
+
+        /// A fifth publisher to merge.
+        public let e: E
+
+        /// A sixth publisher to merge.
+        public let f: F
+
+        /// An seventh publisher to merge.
+        public let g: G
+
+        /// Creates a publisher created by applying the merge function to seven upstream publishers.
+        /// - Parameters:
+        ///   - a: A publisher to merge
+        ///   - b: A second publisher to merge.
+        ///   - c: A third publisher to merge.
+        ///   - d: A fourth publisher to merge.
+        ///   - e: A fifth publisher to merge.
+        ///   - f: A sixth publisher to merge.
+        ///   - g: An seventh publisher to merge.
+        public init(_ a: A, _ b: B, _ c: C, _ d: D, _ e: E, _ f: F, _ g: G) {
+            self.a = a
+            self.b = b
+            self.c = c
+            self.d = d
+            self.e = e
+            self.f = f
+            self.g = g
+        }
+
+        /// Attaches the specified subscriber to this publisher.
+        ///
+        /// Implementations of ``Publisher`` must implement this method.
+        ///
+        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        ///
+        /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
+        public func receive<S>(subscriber: S) where S: Subscriber, G.Failure == S.Failure, G.Output == S.Input {
+            typealias Inner = _Merged<A.Output, Failure, S>
+            let merger = Inner(downstream: subscriber, count: 7)
+            a.subscribe(Inner.Side(index: 0, merger: merger))
+            b.subscribe(Inner.Side(index: 1, merger: merger))
+            c.subscribe(Inner.Side(index: 2, merger: merger))
+            d.subscribe(Inner.Side(index: 3, merger: merger))
+            e.subscribe(Inner.Side(index: 4, merger: merger))
+            f.subscribe(Inner.Side(index: 5, merger: merger))
+            g.subscribe(Inner.Side(index: 6, merger: merger))
+        }
+
+        public func merge<P>(with other: P) -> Publishers.Merge8<A, B, C, D, E, F, G, P> where P: Publisher, G.Failure == P.Failure, G.Output == P.Output {
+            Merge8(a, b, c, d, e, f, g, other)
+        }
+    }
+
+    /// A publisher created by applying the merge function to eight upstream publishers.
+    public struct Merge8<A, B, C, D, E, F, G, H>: Publisher where A: Publisher, B: Publisher, C: Publisher, D: Publisher, E: Publisher, F: Publisher, G: Publisher, H: Publisher, A.Failure == B.Failure, A.Output == B.Output, B.Failure == C.Failure, B.Output == C.Output, C.Failure == D.Failure, C.Output == D.Output, D.Failure == E.Failure, D.Output == E.Output, E.Failure == F.Failure, E.Output == F.Output, F.Failure == G.Failure, F.Output == G.Output, G.Failure == H.Failure, G.Output == H.Output {
+        /// The kind of values published by this publisher.
+        ///
+        /// This publisher uses its upstream publishers' common output type.
+        public typealias Output = A.Output
+
+        /// The kind of errors this publisher might publish.
+        ///
+        /// This publisher uses its upstream publishers' common failure type.
+        public typealias Failure = A.Failure
+
+        /// A publisher to merge.
+        public let a: A
+
+        /// A second publisher to merge.
+        public let b: B
+
+        /// A third publisher to merge.
+        public let c: C
+
+        /// A fourth publisher to merge.
+        public let d: D
+
+        /// A fifth publisher to merge.
+        public let e: E
+
+        /// A sixth publisher to merge.
+        public let f: F
+
+        /// An seventh publisher to merge.
+        public let g: G
+
+        /// A eighth publisher to merge.
+        public let h: H
+
+        /// Creates a publisher created by applying the merge function to eight upstream publishers.
+        /// - Parameters:
+        ///   - a: A publisher to merge
+        ///   - b: A second publisher to merge.
+        ///   - c: A third publisher to merge.
+        ///   - d: A fourth publisher to merge.
+        ///   - e: A fifth publisher to merge.
+        ///   - f: A sixth publisher to merge.
+        ///   - g: An seventh publisher to merge.
+        ///   - h: An eighth publisher to merge.
+        public init(_ a: A, _ b: B, _ c: C, _ d: D, _ e: E, _ f: F, _ g: G, _ h: H) {
+            self.a = a
+            self.b = b
+            self.c = c
+            self.d = d
+            self.e = e
+            self.f = f
+            self.g = g
+            self.h = h
+        }
+
+        /// Attaches the specified subscriber to this publisher.
+        ///
+        /// Implementations of ``Publisher`` must implement this method.
+        ///
+        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        ///
+        /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
+        public func receive<S>(subscriber: S) where S: Subscriber, H.Failure == S.Failure, H.Output == S.Input {
+            typealias Inner = _Merged<A.Output, Failure, S>
+            let merger = Inner(downstream: subscriber, count: 8)
+            a.subscribe(Inner.Side(index: 0, merger: merger))
+            b.subscribe(Inner.Side(index: 1, merger: merger))
+            c.subscribe(Inner.Side(index: 2, merger: merger))
+            d.subscribe(Inner.Side(index: 3, merger: merger))
+            e.subscribe(Inner.Side(index: 4, merger: merger))
+            f.subscribe(Inner.Side(index: 5, merger: merger))
+            g.subscribe(Inner.Side(index: 6, merger: merger))
+            h.subscribe(Inner.Side(index: 7, merger: merger))
+        }
+    }
+    
+    /// A publisher created by applying the merge function to an arbitrary number of upstream publishers.
+    public struct MergeMany<Upstream>: Publisher where Upstream: Publisher {
+        /// The kind of values published by this publisher.
+        ///
+        /// This publisher uses its upstream publishers' common output type.
+        public typealias Output = Upstream.Output
+
+        /// The kind of errors this publisher might publish.
+        ///
+        /// This publisher uses its upstream publishers' common failure type.
+        public typealias Failure = Upstream.Failure
+
+        /// The array of upstream publishers that this publisher merges together.
+        public let publishers: [Upstream]
+
+        /// Creates a publisher created by applying the merge function to an arbitrary number of upstream publishers.
+        /// - Parameter upstream: A variadic parameter containing zero or more publishers to merge with this publisher.
+        public init(_ upstream: Upstream...) {
+            publishers = upstream
+        }
+
+        /// Creates a publisher created by applying the merge function to a sequence of upstream publishers.
+        /// - Parameter upstream: A sequence containing zero or more publishers to merge with this publisher.
+        public init<S>(_ upstream: S) where Upstream == S.Element, S: Swift.Sequence {
+            publishers = Array(upstream)
+        }
+
+        /// Attaches the specified subscriber to this publisher.
+        ///
+        /// Implementations of ``Publisher`` must implement this method.
+        ///
+        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        ///
+        /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
+        public func receive<S>(subscriber: S) where S: Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input {
+            typealias Inner = _Merged<Upstream.Output, Failure, S>
+            let merger = Inner(downstream: subscriber, count: publishers.count)
+            for (index, publisher) in publishers.enumerated() {
+                publisher.subscribe(Inner.Side(index: index, merger: merger))
+            }
+        }
+
+        public func merge(with other: Upstream) -> Publishers.MergeMany<Upstream> {
+            MergeMany(publishers + [other])
         }
     }
 }
@@ -187,7 +892,6 @@ extension Publishers.Merge: Equatable where A: Equatable, B: Equatable {
     }
 }
 
-@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Publishers.Merge3: Equatable where A: Equatable, B: Equatable, C: Equatable {
     /// Returns a Boolean value that indicates whether two publishers are equivalent.
     ///
@@ -197,6 +901,77 @@ extension Publishers.Merge3: Equatable where A: Equatable, B: Equatable, C: Equa
     /// - Returns: `true` if the two merging publishers have equal source publishers; otherwise `false`.
     public static func == (lhs: Publishers.Merge3<A, B, C>, rhs: Publishers.Merge3<A, B, C>) -> Bool {
         lhs.a == rhs.a && lhs.b == rhs.b && lhs.c == rhs.c
+    }
+}
+
+extension Publishers.Merge4: Equatable where A: Equatable, B: Equatable, C: Equatable, D: Equatable {
+    /// Returns a Boolean value that indicates whether two publishers are equivalent.
+    ///
+    /// - Parameters:
+    ///   - lhs: A merging publisher to compare for equality.
+    ///   - rhs: Another merging publisher to compare for equality.
+    /// - Returns: `true` if the two merging publishers have equal source publishers; otherwise `false`.
+    public static func == (lhs: Publishers.Merge4<A, B, C, D>, rhs: Publishers.Merge4<A, B, C, D>) -> Bool {
+        lhs.a == rhs.a && lhs.b == rhs.b && lhs.c == rhs.c && lhs.d == rhs.d
+    }
+}
+
+extension Publishers.Merge5: Equatable where A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable {
+    /// Returns a Boolean value that indicates whether two publishers are equivalent.
+    ///
+    /// - Parameters:
+    ///   - lhs: A merging publisher to compare for equality.
+    ///   - rhs: Another merging publisher to compare for equality.
+    /// - Returns: `true` if the two merging publishers have equal source publishers; otherwise `false`.
+    public static func == (lhs: Publishers.Merge5<A, B, C, D, E>, rhs: Publishers.Merge5<A, B, C, D, E>) -> Bool {
+        lhs.a == rhs.a && lhs.b == rhs.b && lhs.c == rhs.c && lhs.d == rhs.d && lhs.e == rhs.e
+    }
+}
+
+extension Publishers.Merge6: Equatable where A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable, F: Equatable {
+    /// Returns a Boolean value that indicates whether two publishers are equivalent.
+    ///
+    /// - Parameters:
+    ///   - lhs: A merging publisher to compare for equality.
+    ///   - rhs: Another merging publisher to compare for equality.
+    /// - Returns: `true` if the two merging publishers have equal source publishers; otherwise `false`.
+    public static func == (lhs: Publishers.Merge6<A, B, C, D, E, F>, rhs: Publishers.Merge6<A, B, C, D, E, F>) -> Bool {
+        lhs.a == rhs.a && lhs.b == rhs.b && lhs.c == rhs.c && lhs.d == rhs.d && lhs.e == rhs.e && lhs.f == rhs.f
+    }
+}
+
+extension Publishers.Merge7: Equatable where A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable, F: Equatable, G: Equatable {
+    /// Returns a Boolean value that indicates whether two publishers are equivalent.
+    ///
+    /// - Parameters:
+    ///   - lhs: A merging publisher to compare for equality.
+    ///   - rhs: Another merging publisher to compare for equality.
+    /// - Returns: `true` if the two merging publishers have equal source publishers; otherwise `false`.
+    public static func == (lhs: Publishers.Merge7<A, B, C, D, E, F, G>, rhs: Publishers.Merge7<A, B, C, D, E, F, G>) -> Bool {
+        lhs.a == rhs.a && lhs.b == rhs.b && lhs.c == rhs.c && lhs.d == rhs.d && lhs.e == rhs.e && lhs.f == rhs.f && lhs.g == rhs.g
+    }
+}
+
+extension Publishers.Merge8: Equatable where A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable, F: Equatable, G: Equatable, H: Equatable {
+    /// Returns a Boolean value that indicates whether two publishers are equivalent.
+    ///
+    /// - Parameters:
+    ///   - lhs: A merging publisher to compare for equality.
+    ///   - rhs: Another merging publisher to compare for equality.
+    /// - Returns: `true` if the two merging publishers have equal source publishers; otherwise `false`.
+    public static func == (lhs: Publishers.Merge8<A, B, C, D, E, F, G, H>, rhs: Publishers.Merge8<A, B, C, D, E, F, G, H>) -> Bool {
+        lhs.a == rhs.a && lhs.b == rhs.b && lhs.c == rhs.c && lhs.d == rhs.d && lhs.e == rhs.e && lhs.f == rhs.f && lhs.g == rhs.g && lhs.h == rhs.h
+    }
+}
+
+extension Publishers.MergeMany: Equatable where Upstream: Equatable {
+    /// Returns a Boolean value that indicates whether two publishers are equivalent.
+    /// - Parameters:
+    ///   - lhs: A `MergeMany` publisher to compare for equality.
+    ///   - rhs: Another `MergeMany` publisher to compare for equality.
+    /// - Returns: `true` if the publishers have equal `publishers` properties; otherwise `false`.
+    public static func == (lhs: Publishers.MergeMany<Upstream>, rhs: Publishers.MergeMany<Upstream>) -> Bool {
+        lhs.publishers == rhs.publishers
     }
 }
 
