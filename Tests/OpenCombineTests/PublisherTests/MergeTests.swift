@@ -851,16 +851,15 @@ final class MergeTests: XCTestCase {
             .receive(subscription: thirdSubscription)
     }
 
-    func testNoDemandOnSubscriptionCrashes() {
+    func testNoDemandOnSubscriptionNoCrashes() {
         MergeTests.arities.forEach { arity in
             let (_, merge) = getChildrenAndMergeForArity(arity)
 
             let downstreamSubscriber = TrackingSubscriber(
                 receiveSubscription: { subscription in
-                    self.assertCrashes { subscription.request(.none) }
+                    subscription.request(.none)
                 }
             )
-
             merge.subscribe(downstreamSubscriber)
         }
     }
