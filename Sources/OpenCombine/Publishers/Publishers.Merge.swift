@@ -3,7 +3,7 @@
 //
 //
 //  Created by Kyle on 2023/11/21.
-//
+//  Audited for Combine 2023
 
 #if canImport(COpenCombineHelpers)
 import COpenCombineHelpers
@@ -12,9 +12,9 @@ import COpenCombineHelpers
 extension Publisher {
     /// Combines elements from this publisher with those from another publisher, delivering an interleaved sequence of elements.
     ///
-    /// Use ``Publisher/merge(with:)-7fk3a`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:)``. To combine elements from multiple upstream publishers, use ``Publisher/zip(_:)``.
+    /// Use ``Publisher/merge(with:)-394v9`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:)``. To combine elements from multiple upstream publishers, use ``Publisher/zip(_:)``.
     ///
-    /// In this example, as ``Publisher/merge(with:)-7fk3a`` receives input from either upstream publisher, it republishes it to the downstream:
+    /// In this example, as ``Publisher/merge(with:)-394v9`` receives input from either upstream publisher, it republishes it to the downstream:
     ///
     ///     let publisher = PassthroughSubject<Int, Never>()
     ///     let pub2 = PassthroughSubject<Int, Never>()
@@ -46,7 +46,7 @@ extension Publisher {
     /// Combines elements from this publisher with those from two other publishers, delivering an interleaved sequence of elements.
     ///
     /// Use ``Publisher/merge(with:_:)`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:_:)-5crqg``.
-    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:)-8d7k7``.
+    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:)-2p498``.
     ///
     /// In this example, as ``Publisher/merge(with:_:)`` receives input from the upstream publishers, it republishes the interleaved elements to the downstream:
     ///
@@ -81,7 +81,7 @@ extension Publisher {
     /// Combines elements from this publisher with those from three other publishers, delivering an interleaved sequence of elements.
     ///
     /// Use ``Publisher/merge(with:_:_:)`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:_:_:)-48buc``.
-    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-16rcy``.
+    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-67czn``.
     ///
     /// In this example, as ``Publisher/merge(with:_:_:)`` receives input from the upstream publishers, it republishes the interleaved elements to the downstream:
     ///
@@ -120,7 +120,7 @@ extension Publisher {
     /// Combines elements from this publisher with those from four other publishers, delivering an interleaved sequence of elements.
     ///
     /// Use ``Publisher/merge(with:_:_:_:)`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:_:_:)-48buc``.
-    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-16rcy``.
+    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-67czn``.
     ///
     /// In this example, as ``Publisher/merge(with:_:_:_:)`` receives input from the upstream publishers, it republishes the interleaved elements to the downstream:
     ///
@@ -164,7 +164,7 @@ extension Publisher {
     /// Combines elements from this publisher with those from five other publishers, delivering an interleaved sequence of elements.
     ///
     /// Use ``Publisher/merge(with:_:_:_:_:_:)`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:_:_:)-48buc``.
-    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-16rcy``.
+    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-67czn``.
     ///
     /// In this example, as ``Publisher/merge(with:_:_:_:_:_:)`` receives input from the upstream publishers, it republishes the interleaved elements to the downstream:
     ///
@@ -212,7 +212,7 @@ extension Publisher {
     /// Combines elements from this publisher with those from six other publishers, delivering an interleaved sequence of elements.
     ///
     /// Use ``Publisher/merge(with:_:_:_:_:_:)`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:_:_:)-48buc``.
-    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-16rcy``.
+    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-67czn``.
     ///
     /// In this example, as ``Publisher/merge(with:_:_:_:_:_:)`` receives input from the upstream publishers; it republishes the interleaved elements to the downstream:
     ///
@@ -265,7 +265,7 @@ extension Publisher {
     /// Combines elements from this publisher with those from seven other publishers, delivering an interleaved sequence of elements.
     ///
     /// Use ``Publisher/merge(with:_:_:_:_:_:_:)`` when you want to receive a new element whenever any of the upstream publishers emits an element. To receive tuples of the most-recent value from all the upstream publishers whenever any of them emit a value, use ``Publisher/combineLatest(_:_:_:)-48buc``.
-    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-16rcy``.
+    /// To combine elements from multiple upstream publishers, use ``Publisher/zip(_:_:_:)-67czn``.
     ///
     /// In this example, as ``Publisher/merge(with:_:_:_:_:_:_:)`` receives input from the upstream publishers, it republishes the interleaved elements to the downstream:
     ///
@@ -359,7 +359,7 @@ extension Publishers {
         ///
         /// Implementations of ``Publisher`` must implement this method.
         ///
-        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        /// The provided implementation of ``Publisher/subscribe(_:)-199o9``calls this method.
         ///
         /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
         public func receive<S>(subscriber: S) where S: Subscriber, B.Failure == S.Failure, B.Output == S.Input {
@@ -431,7 +431,7 @@ extension Publishers {
         ///
         /// Implementations of ``Publisher`` must implement this method.
         ///
-        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        /// The provided implementation of ``Publisher/subscribe(_:)-199o9``calls this method.
         ///
         /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
         public func receive<S>(subscriber: S) where S: Subscriber, C.Failure == S.Failure, C.Output == S.Input {
@@ -505,7 +505,7 @@ extension Publishers {
         ///
         /// Implementations of ``Publisher`` must implement this method.
         ///
-        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        /// The provided implementation of ``Publisher/subscribe(_:)-199o9``calls this method.
         ///
         /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
         public func receive<S>(subscriber: S) where S: Subscriber, D.Failure == S.Failure, D.Output == S.Input {
@@ -581,7 +581,7 @@ extension Publishers {
         ///
         /// Implementations of ``Publisher`` must implement this method.
         ///
-        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        /// The provided implementation of ``Publisher/subscribe(_:)-199o9``calls this method.
         ///
         /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
         public func receive<S>(subscriber: S) where S: Subscriber, E.Failure == S.Failure, E.Output == S.Input {
@@ -659,7 +659,7 @@ extension Publishers {
         ///
         /// Implementations of ``Publisher`` must implement this method.
         ///
-        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        /// The provided implementation of ``Publisher/subscribe(_:)-199o9``calls this method.
         ///
         /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
         public func receive<S>(subscriber: S) where S: Subscriber, F.Failure == S.Failure, F.Output == S.Input {
@@ -739,7 +739,7 @@ extension Publishers {
         ///
         /// Implementations of ``Publisher`` must implement this method.
         ///
-        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        /// The provided implementation of ``Publisher/subscribe(_:)-199o9``calls this method.
         ///
         /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
         public func receive<S>(subscriber: S) where S: Subscriber, G.Failure == S.Failure, G.Output == S.Input {
@@ -821,7 +821,7 @@ extension Publishers {
         ///
         /// Implementations of ``Publisher`` must implement this method.
         ///
-        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        /// The provided implementation of ``Publisher/subscribe(_:)-199o9``calls this method.
         ///
         /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
         public func receive<S>(subscriber: S) where S: Subscriber, H.Failure == S.Failure, H.Output == S.Input {
@@ -870,7 +870,7 @@ extension Publishers {
         ///
         /// Implementations of ``Publisher`` must implement this method.
         ///
-        /// The provided implementation of ``Publisher/subscribe(_:)-4u8kn``calls this method.
+        /// The provided implementation of ``Publisher/subscribe(_:)-199o9``calls this method.
         ///
         /// - Parameter subscriber: The subscriber to attach to this ``Publisher``, after which it can receive values.
         public func receive<S>(subscriber: S) where S: Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input {
