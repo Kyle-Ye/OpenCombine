@@ -43,37 +43,40 @@ public struct AnySubscriber<Input, Failure: Error>: Subscriber,
     /// - Parameter s: The subscriber to type-erase.
     @inline(__always)
     @inlinable
-    public init<Subscriber: OpenCombine.Subscriber>(_ subscriber: Subscriber)
-        where Input == Subscriber.Input, Failure == Subscriber.Failure
-    {
-        if let erased = subscriber as? AnySubscriber<Input, Failure> {
+    public init<S>(_ s: S) where Input == S.Input, Failure == S.Failure, S: Subscriber {
+        if let erased = s as? AnySubscriber<Input, Failure> {
             self = erased
-            return
-        }
-
-        combineIdentifier = subscriber.combineIdentifier
-
-        box = AnySubscriberBox(subscriber)
-
-        if let description = subscriber as? CustomStringConvertible {
-            descriptionThunk = { description.description }
         } else {
-            let fixedDescription = String(describing: type(of: subscriber))
-            descriptionThunk = { fixedDescription }
-        }
+            combineIdentifier = s.combineIdentifier
 
-        customMirrorThunk = {
-            (subscriber as? CustomReflectable)?.customMirror
-                ?? Mirror(subscriber, children: EmptyCollection())
-        }
+            box = AnySubscriberBox(s)
 
-        if let playgroundDescription = subscriber as? CustomPlaygroundDisplayConvertible {
-            playgroundDescriptionThunk = { playgroundDescription.playgroundDescription }
-        } else if let description = subscriber as? CustomStringConvertible {
-            playgroundDescriptionThunk = { description.description }
-        } else {
-            let fixedDescription = String(describing: type(of: subscriber))
-            playgroundDescriptionThunk = { fixedDescription }
+            // The following use normal memory management semantics
+            if let desc = s as? CustomStringConvertible {
+                descriptionThunk = {
+                    desc.description
+                }
+            } else {
+                let fixedDescription = "\(type(of: s))"
+                descriptionThunk = { fixedDescription }
+            }
+
+            customMirrorThunk = {
+                if let mir = s as? CustomReflectable {
+                    return mir.customMirror
+                } else {
+                    return Mirror(s, children: [:])
+                }
+            }
+
+            if let play = s as? CustomPlaygroundDisplayConvertible {
+                playgroundDescriptionThunk = { play.playgroundDescription }
+            } else if let desc = s as? CustomStringConvertible {
+                playgroundDescriptionThunk = { desc.description }
+            } else {
+                let fixedDescription = "\(type(of: s))"
+                playgroundDescriptionThunk = { fixedDescription }
+            }
         }
     }
 
@@ -119,7 +122,7 @@ public struct AnySubscriber<Input, Failure: Error>: Subscriber,
     @inline(__always)
     @inlinable
     public func receive(_ value: Input) -> Subscribers.Demand {
-        return box.receive(value)
+        box.receive(value)
     }
 
     @inline(__always)
