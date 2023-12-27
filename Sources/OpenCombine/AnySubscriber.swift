@@ -11,6 +11,7 @@
 /// expose. You can also use `AnySubscriber` to create a custom subscriber by providing
 /// closures for the methods defined in `Subscriber`, rather than implementing
 /// `Subscriber` directly.
+@frozen
 public struct AnySubscriber<Input, Failure: Error>: Subscriber,
                                                     CustomStringConvertible,
                                                     CustomReflectable,
@@ -131,6 +132,7 @@ public struct AnySubscriber<Input, Failure: Error>: Subscriber,
 /// A type-erasing base class. Its concrete subclass is generic over the underlying
 /// subscriber.
 @usableFromInline
+@_fixed_layout
 internal class AnySubscriberBase<Input, Failure: Error>: Subscriber {
 
     @inline(__always)
@@ -158,6 +160,7 @@ internal class AnySubscriberBase<Input, Failure: Error>: Subscriber {
 }
 
 @usableFromInline
+@_fixed_layout
 internal final class AnySubscriberBox<Base: Subscriber>
     : AnySubscriberBase<Base.Input, Base.Failure>
 {
@@ -189,6 +192,7 @@ internal final class AnySubscriberBox<Base: Subscriber>
 }
 
 @usableFromInline
+@_fixed_layout
 internal final class ClosureBasedAnySubscriber<Input, Failure: Error>
     : AnySubscriberBase<Input, Failure>
 {

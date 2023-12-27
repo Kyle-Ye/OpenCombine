@@ -62,6 +62,7 @@ extension Publisher {
 ///
 /// You can use OpenCombine’s `eraseToAnyPublisher()` operator to wrap a publisher with
 /// `AnyPublisher`.
+@frozen
 public struct AnyPublisher<Output, Failure: Error>
   : CustomStringConvertible,
     CustomPlaygroundDisplayConvertible
@@ -113,6 +114,7 @@ extension AnyPublisher: Publisher {
 /// A type-erasing base class. Its concrete subclass is generic over the underlying
 /// publisher.
 @usableFromInline
+@_fixed_layout
 internal class PublisherBoxBase<Output, Failure: Error>: Publisher {
 
     @inlinable
@@ -127,6 +129,7 @@ internal class PublisherBoxBase<Output, Failure: Error>: Publisher {
 }
 
 @usableFromInline
+@_fixed_layout
 internal final class PublisherBox<PublisherType: Publisher>
     : PublisherBoxBase<PublisherType.Output, PublisherType.Failure>
 {

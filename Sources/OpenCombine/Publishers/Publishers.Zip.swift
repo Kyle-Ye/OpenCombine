@@ -6,7 +6,7 @@
 //  Audited for Combine 2023
 
 #if canImport(COpenCombineHelpers)
-import COpenCombineHelpers
+@_implementationOnly import COpenCombineHelpers
 #endif
 
 extension Publisher {
