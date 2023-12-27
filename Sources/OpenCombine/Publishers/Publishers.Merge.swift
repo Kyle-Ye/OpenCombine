@@ -9,6 +9,8 @@
 @_implementationOnly import COpenCombineHelpers
 #endif
 
+// MARK: - merge methods on Publisher
+
 extension Publisher {
     /// Combines elements from this publisher with those from another publisher, delivering an interleaved sequence of elements.
     ///
@@ -326,6 +328,8 @@ extension Publisher {
         Publishers.MergeMany([self, other])
     }
 }
+
+// MARK: - Merge Publishers
 
 extension Publishers {
     /// A publisher created by applying the merge function to two upstream publishers.
@@ -832,6 +836,8 @@ extension Publishers {
     }
 }
 
+// MARK: - Equatable conformances
+
 extension Publishers.Merge: Equatable where A: Equatable, B: Equatable {
     /// Returns a Boolean value that indicates whether two publishers are equivalent.
     ///
@@ -927,7 +933,7 @@ extension Publishers.MergeMany: Equatable where Upstream: Equatable {
     }
 }
 
-// MARK: _Merge
+// MARK: - _Merge
 
 extension Publishers {
     fileprivate class _Merged<Input, Failure, Downstream> where Downstream: Subscriber, Input == Downstream.Input, Failure == Downstream.Failure {
