@@ -3,7 +3,7 @@
 //  OpenCombine
 //
 //  Created by Kyle on 2023/11/21.
-//  Audited for Combine 2023
+//  Audited for 2023 Release
 
 #if canImport(COpenCombineHelpers)
 @_implementationOnly import COpenCombineHelpers

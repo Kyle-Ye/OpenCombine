@@ -3,7 +3,7 @@
 //  OpenCombine
 //
 //  Created by Kyle on 2023/7/25.
-//  Audited for Combine 2023
+//  Audited for 2023 Release
 
 #if canImport(COpenCombineHelpers)
 @_implementationOnly import COpenCombineHelpers
@@ -450,7 +450,7 @@ private class AbstractZip<
     }
 
     func convert(values _: [Any]) -> Output {
-        fatalError("Abstract method")
+        abstractMethod()
     }
 
     func receive(subscription: Subscription, index: Int) {
@@ -480,6 +480,7 @@ private class AbstractZip<
         }
     }
 
+    // FIXME: To be audited
     func receive(_ value: Any, index: Int) -> Subscribers.Demand {
         precondition(upstreamCount > index)
         lock.lock()
@@ -621,7 +622,7 @@ extension AbstractZip: Subscription {
         let subscriptions = self.subscriptions
         cancelled = true
         self.subscriptions = Array(repeating: nil, count: upstreamCount)
-        self.buffers = Array(repeating: [], count: upstreamCount)
+        buffers = Array(repeating: [], count: upstreamCount)
         lock.unlock()
         for subscription in subscriptions {
             subscription?.cancel()
@@ -629,8 +630,22 @@ extension AbstractZip: Subscription {
     }
 }
 
+extension AbstractZip: CustomStringConvertible {
+    var description: String { "Zip" }
+}
+
+extension AbstractZip: CustomPlaygroundDisplayConvertible {
+    var playgroundDescription: Any { description }
+}
+
+extension AbstractZip: CustomReflectable {
+    var customMirror: Mirror { Mirror(self, children: [:]) }
+}
+
+// MARK: - AbstractZip.Side
+
 extension AbstractZip {
-    struct Side<SideInput> {
+    struct Side<Input> {
         let index: Int
         let zip: AbstractZip
         let combineIdentifier: CombineIdentifier
@@ -644,13 +659,11 @@ extension AbstractZip {
 }
 
 extension AbstractZip.Side: Subscriber {
-    typealias Input = SideInput
-
     func receive(subscription: Subscription) {
         zip.receive(subscription: subscription, index: index)
     }
 
-    func receive(_ input: SideInput) -> Subscribers.Demand {
+    func receive(_ input: Input) -> Subscribers.Demand {
         zip.receive(input, index: index)
     }
 
@@ -659,24 +672,12 @@ extension AbstractZip.Side: Subscriber {
     }
 }
 
-extension AbstractZip: CustomStringConvertible {
-    var description: String { "Zip" }
-}
-
 extension AbstractZip.Side: CustomStringConvertible {
     var description: String { "Zip" }
 }
 
-extension AbstractZip: CustomPlaygroundDisplayConvertible {
-    var playgroundDescription: Any { description }
-}
-
 extension AbstractZip.Side: CustomPlaygroundDisplayConvertible {
     var playgroundDescription: Any { description }
-}
-
-extension AbstractZip: CustomReflectable {
-    var customMirror: Mirror { Mirror(self, children: [:]) }
 }
 
 extension AbstractZip.Side: CustomReflectable {
