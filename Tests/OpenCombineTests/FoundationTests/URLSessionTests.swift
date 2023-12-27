@@ -14,11 +14,7 @@ import XCTest
 import FoundationNetworking
 #endif
 
-// Prior to Swift 5.3 there were incompatibilities between Darwin Foundation and
-// swift-corelibs-foundation that were making these tests impossible to build.
-//
-// Those were fixed in https://github.com/apple/swift-corelibs-foundation/pull/2587.
-#if canImport(Darwin) || swift(>=5.3) && !WASI // TEST_DISCOVERY_CONDITION
+#if !os(WASI) // TEST_DISCOVERY_CONDITION
 
 #if OPENCOMBINE_COMPATIBILITY_TEST
 import Combine

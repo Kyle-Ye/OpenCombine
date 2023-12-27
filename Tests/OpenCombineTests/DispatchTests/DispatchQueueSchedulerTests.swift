@@ -5,7 +5,7 @@
 //  Created by Sergej Jaskiewicz on 26.08.2019.
 //
 
-#if !WASI // TEST_DISCOVERY_CONDITION
+#if !os(WASI) // TEST_DISCOVERY_CONDITION
 
 import Dispatch
 import XCTest
@@ -612,4 +612,4 @@ private struct KeyedWrapper<Value: Codable & Equatable>: Codable, Equatable {
     let value: Value
 }
 
-#endif // !WASI
+#endif // !os(WASI)

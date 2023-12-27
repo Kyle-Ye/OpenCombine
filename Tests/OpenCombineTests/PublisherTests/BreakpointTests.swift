@@ -5,7 +5,7 @@
 //  Created by Sergej Jaskiewicz on 03.12.2019.
 //
 
-#if !WASI
+#if !os(WASI)
 
 import XCTest
 
@@ -181,4 +181,4 @@ final class BreakpointTests: XCTestCase {
     }
 }
 
-#endif // !WASI
+#endif // !os(WASI)

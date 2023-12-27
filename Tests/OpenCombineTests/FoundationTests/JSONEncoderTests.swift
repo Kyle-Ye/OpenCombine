@@ -5,7 +5,7 @@
 //  Created by Sergej Jaskiewicz on 10.12.2019.
 //
 
-#if !WASI // TEST_DISCOVERY_CONDITION
+#if !os(WASI) // TEST_DISCOVERY_CONDITION
 
 import Foundation
 import XCTest
@@ -68,4 +68,4 @@ final class JSONEncoderTests: XCTestCase {
     }
 }
 
-#endif // !WASI
+#endif // !os(WASI)

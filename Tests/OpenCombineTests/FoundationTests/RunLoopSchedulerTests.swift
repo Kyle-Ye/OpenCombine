@@ -5,7 +5,7 @@
 //  Created by Sergej Jaskiewicz on 14.12.2019.
 //
 
-#if !WASI // TEST_DISCOVERY_CONDITION
+#if !os(WASI) // TEST_DISCOVERY_CONDITION
 
 import Foundation
 import XCTest
@@ -634,4 +634,4 @@ extension RunLoopScheduler.SchedulerTimeType: DateBackedSchedulerTimeType {}
 @available(macOS 10.15, iOS 13.0, *)
 extension RunLoopScheduler: RunLoopLikeScheduler {}
 
-#endif // !WASI
+#endif // !os(WASI)

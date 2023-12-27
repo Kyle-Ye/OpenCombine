@@ -741,7 +741,7 @@ final class ZipTests: XCTestCase {
         }
     }
 
-    #if !WASI
+    #if !os(WASI)
     // FIXME: swift-testing macro for specifying the relationship between a bug and a test case
     // Uncomment the following line when we migrate to swift-testing
     // @Test("Zip reference issue", .bug("#241", relationship: .verifiesFix))

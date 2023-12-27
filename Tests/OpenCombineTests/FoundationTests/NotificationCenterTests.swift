@@ -5,7 +5,7 @@
 //  Created by Sergej Jaskiewicz on 10.12.2019.
 //
 
-#if !WASI // TEST_DISCOVERY_CONDITION
+#if !os(WASI) // TEST_DISCOVERY_CONDITION
 
 import Foundation
 import XCTest
@@ -626,12 +626,4 @@ extension TestNotificationCenter.Event: CustomStringConvertible {
     }
 }
 
-#if !canImport(Darwin) && swift(<5.1)
-extension Notification.Name {
-    init(_ rawValue: String) {
-        self.init(rawValue: rawValue)
-    }
-}
-#endif // !canImport(Darwin) && swift(<5.1)
-
-#endif // !WASI
+#endif // !os(WASI)

@@ -31,9 +31,6 @@ let openCombineTarget: Target = .target(
         "Publishers/Publishers.Encode.swift.gyb",
         "Publishers/Publishers.MapKeyPath.swift.gyb",
         "Publishers/Publishers.Catch.swift.gyb"
-    ],
-    swiftSettings: [
-        .define("WASI", .when(platforms: [.wasi])),
     ]
 )
 let openCombineFoundationTarget: Target = .target(
@@ -62,7 +59,6 @@ let openCombineTestsTarget: Target = .testTarget(
     ],
     swiftSettings: [
         .unsafeFlags(["-enable-testing"]),
-        .define("WASI", .when(platforms: [.wasi])),
     ]
 )
 
