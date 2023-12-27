@@ -17,7 +17,7 @@ import OpenCombine
 import OpenCombineDispatch
 #endif
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 final class DispatchQueueSchedulerTests: XCTestCase {
 
     // MARK: - Scheduler.SchedulerTimeType
@@ -590,7 +590,7 @@ final class DispatchQueueSchedulerTests: XCTestCase {
 
 #if OPENCOMBINE_COMPATIBILITY_TEST || !canImport(Combine)
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 private typealias Scheduler = DispatchQueue
 
 private let mainScheduler = DispatchQueue.main
@@ -605,7 +605,7 @@ private let backgroundScheduler = DispatchQueue.global(qos: .background).ocombin
 
 #endif // OPENCOMBINE_COMPATIBILITY_TEST || !canImport(Combine)
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 private typealias Stride = Scheduler.SchedulerTimeType.Stride
 
 private struct KeyedWrapper<Value: Codable & Equatable>: Codable, Equatable {

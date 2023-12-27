@@ -17,7 +17,7 @@ import OpenCombine
 import OpenCombineFoundation
 #endif
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 final class NotificationCenterTests: XCTestCase {
 
     func testRequestingDemand() {
@@ -456,7 +456,7 @@ final class NotificationCenterTests: XCTestCase {
 }
 
 #if OPENCOMBINE_COMPATIBILITY_TEST || !canImport(Combine)
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 private func makePublisher(
     _ center: NotificationCenter,
     for name: Notification.Name,

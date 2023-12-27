@@ -17,7 +17,7 @@ import OpenCombine
 import OpenCombineFoundation
 #endif
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 final class OperationQueueSchedulerTests: XCTestCase {
 
     // MARK: - Scheduler.SchedulerTimeType
@@ -321,15 +321,15 @@ private func makeScheduler(_ queue: OperationQueue) -> OperationQueueScheduler {
 
 #endif
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension OperationQueueScheduler.SchedulerTimeType.Stride
     : TimeIntervalBackedSchedulerStride
 {}
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension OperationQueueScheduler.SchedulerTimeType: DateBackedSchedulerTimeType {}
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension OperationQueueScheduler: RunLoopLikeScheduler {}
 
 private final class TestOperationQueue: OperationQueue {
@@ -358,7 +358,7 @@ private final class TestOperationQueue: OperationQueue {
 
     private(set) var history = [Event]()
 
-    @available(macOS 10.15, iOS 13.0, *)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     override var progress: Progress {
         history.append(.progress)
         return super.progress
@@ -379,7 +379,7 @@ private final class TestOperationQueue: OperationQueue {
         super.addOperation(block)
     }
 
-    @available(macOS 10.15, iOS 13.0, *)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     override func addBarrierBlock(_ barrier: @escaping () -> Void) {
         history.append(.addBarrierBlock(barrier))
         super.addBarrierBlock(barrier)

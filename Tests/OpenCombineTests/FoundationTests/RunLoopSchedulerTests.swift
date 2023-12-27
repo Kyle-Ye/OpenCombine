@@ -17,7 +17,7 @@ import OpenCombine
 import OpenCombineFoundation
 #endif
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 final class RunLoopSchedulerTests: XCTestCase {
 
     // MARK: - Scheduler.SchedulerTimeType
@@ -599,14 +599,14 @@ private func makeScheduler(_ runLoop: RunLoop) -> RunLoopScheduler {
 
 #endif
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 protocol DateBackedSchedulerTimeType: Strideable, Codable, Hashable {
     init(_ date: Date)
 
     var date: Date { get }
 }
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 protocol TimeIntervalBackedSchedulerStride: SchedulerTimeIntervalConvertible,
                                             Comparable,
                                             SignedNumeric,
@@ -619,19 +619,19 @@ protocol TimeIntervalBackedSchedulerStride: SchedulerTimeIntervalConvertible,
     var timeInterval: TimeInterval { get }
 }
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 protocol RunLoopLikeScheduler: Scheduler
     where SchedulerTimeType: DateBackedSchedulerTimeType,
           SchedulerTimeType.Stride: TimeIntervalBackedSchedulerStride {
 }
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension RunLoopScheduler.SchedulerTimeType.Stride: TimeIntervalBackedSchedulerStride {}
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension RunLoopScheduler.SchedulerTimeType: DateBackedSchedulerTimeType {}
 
-@available(macOS 10.15, iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension RunLoopScheduler: RunLoopLikeScheduler {}
 
 #endif // !os(WASI)
