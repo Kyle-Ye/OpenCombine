@@ -652,8 +652,12 @@ extension AbstractCombineLatest {
 }
 
 extension AbstractCombineLatest.Side: Subscriber {
+    // NOTE: Audited with Combine 2023 release.
+    // A better implementation is `let combineIdentifier = CombineIdentifier()` IMO.
     var combineIdentifier: CombineIdentifier {
-        CombineIdentifier(AbstractCombineLatest.self)
+        // `CombineIdentifier(AbstractCombineLatest.self) will cause build fail on non-Darwin platform
+        // Tracked by https://github.com/apple/swift/issues/70645
+        CombineIdentifier(AbstractCombineLatest.self as AnyObject)
     }
     
     func receive(subscription: Subscription) {
