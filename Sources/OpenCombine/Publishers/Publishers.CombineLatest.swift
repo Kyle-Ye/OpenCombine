@@ -10,7 +10,7 @@
 extension Publisher {
     /// Subscribes to an additional publisher and publishes a tuple upon receiving output from either publisher.
     ///
-    /// Use ``Publisher/combineLatest(_:)`` when you want the downstream subscriber to receive a tuple of the most-recent element from multiple publishers when any of them emit a value. To pair elements from multiple publishers, use ``Publisher/zip(_:)`` instead. To receive just the most-recent element from multiple publishers rather than tuples, use ``Publisher/merge(with:)-7qt71``.
+    /// Use ``Publisher/combineLatest(_:)`` when you want the downstream subscriber to receive a tuple of the most-recent element from multiple publishers when any of them emit a value. To pair elements from multiple publishers, use ``Publisher/zip(_:)`` instead. To receive just the most-recent element from multiple publishers rather than tuples, use ``Publisher/merge(with:)-394v9``.
     ///
     /// > Tip: The combined publisher doesn't produce elements until each of its upstream publishers publishes at least one element.
     ///
@@ -93,7 +93,7 @@ extension Publisher {
 
     /// Subscribes to two additional publishers and publishes a tuple upon receiving output from any of the publishers.
     ///
-    /// Use ``Publisher/combineLatest(_:_:)-5crqg`` when you want the downstream subscriber to receive a tuple of the most-recent element from multiple publishers when any of them emit a value. To combine elements from multiple publishers, use ``Publisher/zip(_:_:)-8d7k7`` instead. To receive just the most-recent element from multiple publishers rather than tuples, use ``Publisher/merge(with:_:)``.
+    /// Use ``Publisher/combineLatest(_:_:)-81vgd`` when you want the downstream subscriber to receive a tuple of the most-recent element from multiple publishers when any of them emit a value. To combine elements from multiple publishers, use ``Publisher/zip(_:_:)-2p498`` instead. To receive just the most-recent element from multiple publishers rather than tuples, use ``Publisher/merge(with:_:)``.
     ///
     /// > Tip: The combined publisher doesn't produce elements until each of its upstream publishers publishes at least one element.
     ///
@@ -101,7 +101,7 @@ extension Publisher {
     ///
     /// All upstream publishers need to finish for this publisher to finish. If an upstream publisher never publishes a value, this publisher never finishes.
     ///
-    /// In this example, three instances of ``PassthroughSubject`` emit values; as ``Publisher/combineLatest(_:_:)-5crqg`` receives input from any of the upstream publishers, it combines the latest value from each publisher into a tuple and publishes it:
+    /// In this example, three instances of ``PassthroughSubject`` emit values; as ``Publisher/combineLatest(_:_:)-81vgd`` receives input from any of the upstream publishers, it combines the latest value from each publisher into a tuple and publishes it:
     ///
     ///     let pub = PassthroughSubject<Int, Never>()
     ///     let pub2 = PassthroughSubject<Int, Never>()
@@ -185,7 +185,7 @@ extension Publisher {
 
     /// Subscribes to three additional publishers and publishes a tuple upon receiving output from any of the publishers.
     ///
-    /// Use ``Publisher/combineLatest(_:_:_:)-48buc`` when you want the downstream subscriber to receive a tuple of the most-recent element from multiple publishers when any of them emit a value. To combine elements from multiple publishers, use ``Publisher/zip(_:_:_:)-16rcy`` instead. To receive just the most-recent element from multiple publishers rather than tuples, use ``Publisher/merge(with:_:_:)``.
+    /// Use ``Publisher/combineLatest(_:_:_:)-7mt86`` when you want the downstream subscriber to receive a tuple of the most-recent element from multiple publishers when any of them emit a value. To combine elements from multiple publishers, use ``Publisher/zip(_:_:_:)-67czn`` instead. To receive just the most-recent element from multiple publishers rather than tuples, use ``Publisher/merge(with:_:_:)``.
     ///
     /// > Tip: The combined publisher doesn't produce elements until each of its upstream publishers publishes at least one element.
     ///
@@ -193,7 +193,7 @@ extension Publisher {
     ///
     /// All upstream publishers need to finish for this publisher to finish. If an upstream publisher never publishes a value, this publisher never finishes.
     ///
-    /// In the example below, ``Publisher/combineLatest(_:_:_:)-48buc`` receives input from any of the publishers, combines the latest value from each publisher into a tuple and publishes it:
+    /// In the example below, ``Publisher/combineLatest(_:_:_:)-7mt86`` receives input from any of the publishers, combines the latest value from each publisher into a tuple and publishes it:
     ///
     ///     let pub = PassthroughSubject<Int, Never>()
     ///     let pub2 = PassthroughSubject<Int, Never>()
