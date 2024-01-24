@@ -7,27 +7,14 @@ on:
     branches: [main]
 
 jobs:
-  carton_wasmer_test_5_7:
-    name: "Execute tests on Wasm (Swift 5.7)"
-    runs-on: ubuntu-20.04
-
+  carton_wasmer_test:
+    name: Execute tests on WASM
+    strategy:
+      fail-fast: false
+      matrix:
+        swift_version: ["5.7", "5.8", "5.9"]
+        os: [ubuntu-20.04]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - uses: swiftwasm/swiftwasm-action@v5.7
-
-  # swiftwasm/swiftwasm-action@v5.8 and @v5.9 is not supported upstream
-  # carton_wasmer_test_5_8:
-  #   name: "Execute tests on Wasm (Swift 5.8)"
-  #   runs-on: ubuntu-20.04
-
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: swiftwasm/swiftwasm-action@v5.8
-
-  # carton_wasmer_test_5_9:
-  #   name: "Execute tests on Wasm (Swift 5.9)"
-  #   runs-on: ubuntu-20.04
-
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: swiftwasm/swiftwasm-action@v5.9
+      - uses: swiftwasm/swiftwasm-action@v${{ matrix.swift_version }}
