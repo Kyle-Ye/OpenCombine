@@ -7,8 +7,6 @@
 
 import XCTest
 
-#if swift(>=5.1)
-
 #if OPENCOMBINE_COMPATIBILITY_TEST
 import Combine
 
@@ -420,5 +418,3 @@ private final class TestObject: ObservableObject {
         nonPublished = initialValue
     }
 }
-
-#endif

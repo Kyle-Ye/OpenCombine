@@ -222,11 +222,7 @@ func fromNever<T>(_ resultType: T.Type) -> (Never) -> T {
     //
     // The second variant compiles with all Swift versions,
     // but produces a warning in Swift 5.1.
-#if swift(>=5.1)
     return { (_: Never) -> T in }
-#else
-    return { switch $0 {} }
-#endif
 }
 
 // swiftlint:enable generic_type_name
