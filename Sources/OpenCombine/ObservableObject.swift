@@ -46,7 +46,6 @@ private protocol _ObservableObjectProperty {
     var objectWillChange: ObservableObjectPublisher? { get nonmutating set }
 }
 
-#if swift(>=5.1)
 extension Published: _ObservableObjectProperty {}
 
 extension ObservableObject where ObjectWillChangePublisher == ObservableObjectPublisher {
@@ -91,8 +90,6 @@ extension ObservableObject where ObjectWillChangePublisher == ObservableObjectPu
         return installedPublisher ?? ObservableObjectPublisher()
     }
 }
-
-#endif
 
 /// A publisher that publishes changes from observable objects.
 public final class ObservableObjectPublisher: Publisher {

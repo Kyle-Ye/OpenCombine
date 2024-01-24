@@ -7,8 +7,6 @@
 
 import XCTest
 
-#if swift(>=5.1)
-
 #if OPENCOMBINE_COMPATIBILITY_TEST
 import Combine
 
@@ -322,5 +320,3 @@ private final class TestObject: ObservableObject {
         _state = Published(initialValue: initialValue)
     }
 }
-
-#endif

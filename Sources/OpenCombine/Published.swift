@@ -5,8 +5,6 @@
 //  Created by Евгений Богомолов on 01/09/2019.
 //
 
-#if swift(>=5.1)
-
 extension Publisher where Failure == Never {
 
     /// Republishes elements received from a publisher, by assigning them to a property
@@ -79,7 +77,6 @@ extension Publisher where Failure == Never {
 /// ### See Also
 ///
 /// - `Publisher.assign(to:)`
-@available(swift, introduced: 5.1)
 @propertyWrapper
 public struct Published<Value> {
 
@@ -218,9 +215,3 @@ public struct Published<Value> {
         // TODO: Benchmark and explore a possibility to use _modify
     }
 }
-#else
-
-@available(swift, introduced: 5.1)
-public typealias Published = Never
-
-#endif // swift(>=5.1)

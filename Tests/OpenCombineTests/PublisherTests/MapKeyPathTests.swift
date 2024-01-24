@@ -118,7 +118,6 @@ final class MapKeyPathTests: XCTestCase {
         }
     }
 
-    #if swift(>=5.8)
     #if Xcode
     func testMapKeyPathReflection() throws {
         try testReflection(parentInput: Int.self,
@@ -185,44 +184,6 @@ final class MapKeyPathTests: XCTestCase {
                                ("keyPath0", .contains(#"\Int."#)),
                                ("keyPath1", .contains(#"\Int."#)),
                                ("keyPath2", .contains(#"\Int."#))
-                           ),
-                           playgroundDescription: "ValueForKeys",
-                           subscriberIsAlsoSubscription: false,
-                           { $0.map(\.doubled, \.tripled, \.quadrupled) })
-    }
-    #endif
-    #else
-    // WASM Platform CI still use Swift 5.7
-    // which will get old KeyPath.description behavior
-    func testMapKeyPathReflection() throws {
-        try testReflection(parentInput: Int.self,
-                           parentFailure: Never.self,
-                           description: "ValueForKey",
-                           customMirror: expectedChildren(
-                               ("keyPath", .contains("KeyPath"))
-                           ),
-                           playgroundDescription: "ValueForKey",
-                           subscriberIsAlsoSubscription: false,
-                           { $0.map(\.doubled) })
-
-        try testReflection(parentInput: Int.self,
-                           parentFailure: Never.self,
-                           description: "ValueForKeys",
-                           customMirror: expectedChildren(
-                               ("keyPath0", .contains("KeyPath")),
-                               ("keyPath1", .contains("KeyPath"))
-                           ),
-                           playgroundDescription: "ValueForKeys",
-                           subscriberIsAlsoSubscription: false,
-                           { $0.map(\.doubled, \.tripled) })
-
-        try testReflection(parentInput: Int.self,
-                           parentFailure: Never.self,
-                           description: "ValueForKeys",
-                           customMirror: expectedChildren(
-                               ("keyPath0", .contains("KeyPath")),
-                               ("keyPath1", .contains("KeyPath")),
-                               ("keyPath2", .contains("KeyPath"))
                            ),
                            playgroundDescription: "ValueForKeys",
                            subscriberIsAlsoSubscription: false,
